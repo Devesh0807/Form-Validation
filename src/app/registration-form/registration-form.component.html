@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="register-sec">
+    <h3>Registration Form</h3>
+  <form #registerForm="ngForm">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input required ngModel id="firstName" maxlength="30" name="firstName" type="text" class="form-control" #firstName="ngModel">
+      <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+        <div *ngIf="firstName.errors.required">First name is required</div>
+        <div *ngIf="firstName.errors.maxlength">Max length 30</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input required ngModel id="lastName" minlength="3" name="lastName" type="text" class="form-control" #lastName="ngModel">
+      <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
+        <div *ngIf="lastName.errors.required">Last Name is required</div>
+        <div *ngIf="lastName.errors.minlength">minimum length is 3</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="Email">Email</label>
+      <input required ngModel pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email" name="email" type="email" class="form-control" #Email="ngModel">
+      <div class="alert alert-danger" *ngIf="Email.touched && !Email.valid">
+        <div *ngIf="Email.errors.required">Email is required</div>
+        <div *ngIf="Email.errors.pattern">Email is not valid</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input required minlength="6" maxlength="20" [(ngModel)]="pwd" id="password" name="password" type="password" class="form-control" #password="ngModel">
+      <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+        <div *ngIf="password.errors.required">Password is required</div>
+        <div *ngIf="password.errors.minlength">Password should of minimum 6 characters</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="cpassword">Confirm Password</label>
+      <input required [(ngModel)]="cpwd" validateEqual="password" id="cpassword" name="cpassword" type="password" class="form-control" #cpassword="ngModel" (change)="match(pwd, cpwd)">
+      <div class="alert alert-danger" *ngIf="cpassword.touched && !cpassword.valid">
+        <div *ngIf="cpassword.errors.required">Confirm Password is required</div>
+      </div>
+      <div *ngIf="matchPwd" class="alert alert-danger">Password donot match</div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input required ngModel id="phone" name="phone" type="tel" class="form-control" #phone="ngModel">
+      <div class="alert alert-danger" *ngIf="phone.touched && !phone.valid">
+        Phone Number is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <textarea id="address" name="address" rows="3" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <button type="submit" [disabled]="!registerForm.valid" class="btn btn-success" (click)="confirmMsg()">Submit</button>
+      <span>Already a member <a routerLink="/signin">Sign In?</a></span>
+    </div>
+  </form>
+  </div>
+</div>

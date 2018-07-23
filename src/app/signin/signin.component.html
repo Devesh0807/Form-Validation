@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="signin-sec">
+      <h3>Sign In</h3>
+    <form #signinForm="ngForm">
+      <div class="form-group">
+        <label for="Email">Email</label>
+        <input required ngModel pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email" name="email" type="email" class="form-control" #Email="ngModel">
+        <div class="alert alert-danger" *ngIf="Email.touched && !Email.valid">
+          <div *ngIf="Email.errors.required">Email is required</div>
+          <div *ngIf="Email.errors.pattern">Email is not valid</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input required minlength="6" maxlength="20" ngModel id="password" name="password" type="password" class="form-control" #password="ngModel">
+        <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">Password should of minimum 6 characters</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" [disabled]="!signinForm.valid" class="btn btn-success">Submit</button>
+        <span>Not a member yet <a routerLink="/registration">Sign Up?</a></span>
+      </div>
+    </form>
+    </div>
+  </div>
+  
